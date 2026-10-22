@@ -43,7 +43,7 @@
 
 **Что сделать:**
 
-- [ ] Создать Next.js проект: `npx create-next-app@latest family-budget --typescript --tailwind --eslint --app --src-dir`
+- [ ] Создать Next.js проект: `npx create-next-app@latest family-finances --typescript --tailwind --eslint --app --src-dir`
 - [ ] Установить зависимости: `npm i @supabase/supabase-js @supabase/ssr`
 - [ ] Создать `.env.local` с ключами Supabase (URL + anon key).
 - [ ] Настроить Supabase-клиент для Server и Client Components (по официальному гайду Supabase для Next.js).
@@ -290,7 +290,7 @@
 
 1. Открой Cursor.
 2. Задай **первый запрос** (из Этапа 0 выше): попроси чеклист создания проекта и настройки Supabase.
-3. Создай проект: `npx create-next-app@latest family-budget --typescript --tailwind --eslint --app --src-dir`.
+3. Создай проект: `npx create-next-app@latest family-finances --typescript --tailwind --eslint --app --src-dir`.
 4. Сделай первый коммит: `git init && git add . && git commit -m "init: project setup"`.
 5. **Остановись.** Ты начал. Завтра — Этап 1.
 
