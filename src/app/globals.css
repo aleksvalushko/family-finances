@@ -3,19 +3,47 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --input: #0e1b2a;
+  --input-border: #ffffff13;
+  --input-active-border: #2dd4bf73;
+  --muted: #8aa0b5;
+  --danger: #f87171;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-input: var(--input);
+  --color-muted: var(--muted);
+  --color-danger: var(--danger);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+@layer components {
+  .input {
+    border-color: var(--input-border);
+
+    &:focus {
+      border-color: var(--input-active-border);
+      box-shadow: 0 0 0 3px #2dd4bf12;
+    }
+
+    &[aria-invalid="true"] {
+      border-color: var(--danger);
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --input: #0e1b2a;
+    --input-border: #ffffff13;
+    --input-active-border: #2dd4bf73;
+    --muted: #8aa0b5;
+    --danger: #f87171;
   }
 }
 
