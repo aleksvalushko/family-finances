@@ -99,18 +99,18 @@
 
 **Что сделать:**
 
-- [ ] В Supabase SQL Editor создать таблицы:
+- [x] В Supabase SQL Editor создать таблицы:
   - `families` (id, name, created_at)
   - `profiles` (id = auth.uid(), family_id, display_name)
   - `categories` (id, family_id, name, icon, type)
   - `transactions` (id, family_id, user_id, amount, type, category_id, note, created_at)
-- [ ] **Сразу включить RLS** на всех таблицах: `ALTER TABLE ... ENABLE ROW LEVEL SECURITY;`
-- [ ] Написать политики:
+- [x] **Сразу включить RLS** на всех таблицах: `ALTER TABLE ... ENABLE ROW LEVEL SECURITY;`
+- [x] Написать политики:
   - `profiles`: свой профиль и профили своей семьи
   - `categories`: только категории своей семьи
   - `transactions`: только транзакции своей семьи
-- [ ] Триггер: при регистрации автоматически создавать `profile`
-- [ ] Создание «семьи» при первом входе или экран «Создать семью / Присоединиться по коду»
+- [x] Триггер: при регистрации автоматически создавать `profile`
+- [x] Создание «семьи» при первом входе или экран «Создать семью / Присоединиться по коду»
 
 **Что сказать Cursor:**
 
