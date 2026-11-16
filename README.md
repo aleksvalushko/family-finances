@@ -34,9 +34,9 @@
 1. Установить Node.js (LTS), если ещё нет.
 2. Создать аккаунт на [supabase.com](https://supabase.com) (бесплатный тариф).
 3. Создать новый проект в Supabase. Записать:
-    - `Project URL`
-    - публичный ключ (**publishable** / в старых текстах часто называют **anon**)
-    - `service_role key` (только в секретном месте; не коммитить; не класть в `NEXT_PUBLIC_*`)
+   - `Project URL`
+   - публичный ключ (**publishable** / в старых текстах часто называют **anon**)
+   - `service_role key` (только в секретном месте; не коммитить; не класть в `NEXT_PUBLIC_*`)
 4. Cursor уже есть; для учёбы удобен режим `ask`.
 
 **Что сказать Cursor (если начинаешь с нуля):**
@@ -63,14 +63,14 @@
       `npx create-next-app@latest family-finances --typescript --tailwind --eslint --app --src-dir`
 - [x] Установить зависимости: `npm i @supabase/supabase-js @supabase/ssr`
 - [x] Создать `.env.local` (не коммитить):
-    - `NEXT_PUBLIC_SUPABASE_URL`
-    - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`  
-      (имя переменной должно совпадать с кодом; значение — публичный ключ из Dashboard)
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`  
+    (имя переменной должно совпадать с кодом; значение — публичный ключ из Dashboard)
 - [x] Настроить клиенты по гайду Supabase для Next.js:
-    - `src/lib/supabase/client.ts` — браузер (Client Components)
-    - `src/lib/supabase/server.ts` — Server Components / Server Actions / Route Handlers
-    - `src/lib/supabase/proxy.ts` — `updateSession` (обновление auth-cookies)
-    - `src/proxy.ts` — вход для **Next.js 16** (в старых гайдах это был `middleware.ts` на Next ≤15)
+  - `src/lib/supabase/client.ts` — браузер (Client Components)
+  - `src/lib/supabase/server.ts` — Server Components / Server Actions / Route Handlers
+  - `src/lib/supabase/proxy.ts` — `updateSession` (обновление auth-cookies)
+  - `src/proxy.ts` — вход для **Next.js 16** (в старых гайдах это был `middleware.ts` на Next ≤15)
 - [x] Smoke: приложение стартует; с сервера вызывается `getClaims()` без ошибок env/ключа (до логина claims могут быть пустыми)
 - [ ] Страницы `/login` и `/register` (email + пароль)
 - [ ] Supabase Auth: `signUp`, `signInWithPassword`, `signOut`
@@ -100,15 +100,15 @@
 **Что сделать:**
 
 - [ ] В Supabase SQL Editor создать таблицы:
-    - `families` (id, name, created_at)
-    - `profiles` (id = auth.uid(), family_id, display_name)
-    - `categories` (id, family_id, name, icon, type)
-    - `transactions` (id, family_id, user_id, amount, type, category_id, note, created_at)
+  - `families` (id, name, created_at)
+  - `profiles` (id = auth.uid(), family_id, display_name)
+  - `categories` (id, family_id, name, icon, type)
+  - `transactions` (id, family_id, user_id, amount, type, category_id, note, created_at)
 - [ ] **Сразу включить RLS** на всех таблицах: `ALTER TABLE ... ENABLE ROW LEVEL SECURITY;`
 - [ ] Написать политики:
-    - `profiles`: свой профиль и профили своей семьи
-    - `categories`: только категории своей семьи
-    - `transactions`: только транзакции своей семьи
+  - `profiles`: свой профиль и профили своей семьи
+  - `categories`: только категории своей семьи
+  - `transactions`: только транзакции своей семьи
 - [ ] Триггер: при регистрации автоматически создавать `profile`
 - [ ] Создание «семьи» при первом входе или экран «Создать семью / Присоединиться по коду»
 
@@ -136,10 +136,10 @@
 - [ ] Главный экран: крупный баланс за месяц (доходы − расходы)
 - [ ] Кнопка «+» (плавающая, внизу по центру)
 - [ ] Bottom sheet (шторка) для добавления транзакции:
-    - поле суммы (цифровая клавиатура)
-    - переключатель «Расход / Доход»
-    - сетка иконок категорий
-    - кнопка «Сохранить»
+  - поле суммы (цифровая клавиатура)
+  - переключатель «Расход / Доход»
+  - сетка иконок категорий
+  - кнопка «Сохранить»
 - [ ] Server Action (или клиентская мутация) для вставки в `transactions`
 - [ ] Список последних 5–10 транзакций под балансом
 - [ ] Подсчёт баланса: SQL с `SUM` по `type` и фильтром по месяцу, либо агрегация на клиенте
