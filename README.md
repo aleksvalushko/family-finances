@@ -72,10 +72,10 @@
   - `src/lib/supabase/proxy.ts` — `updateSession` (обновление auth-cookies)
   - `src/proxy.ts` — вход для **Next.js 16** (в старых гайдах это был `middleware.ts` на Next ≤15)
 - [x] Smoke: приложение стартует; с сервера вызывается `getClaims()` без ошибок env/ключа (до логина claims могут быть пустыми)
-- [ ] Страницы `/login` и `/register` (email + пароль)
-- [ ] Supabase Auth: `signUp`, `signInWithPassword`, `signOut`
-- [ ] Защита роутов: если гость — редирект на `/login` (добавлять в `updateSession`, когда страницы login уже есть)
-- [ ] Главная: приветствие и кнопка «Выйти»
+- [x] Страницы `/login` и `/register` (email + пароль)
+- [x] Supabase Auth: `signUp`, `signInWithPassword`, `signOut`
+- [x] Защита роутов: если гость — редирект на `/login` (добавлять в `updateSession`, когда страницы login уже есть)
+- [x] Главная: приветствие и кнопка «Выйти»
 
 **Что сказать Cursor:**
 

@@ -27,8 +27,30 @@ export async function updateSession(request: NextRequest) {
 	);
 
 	// Не вставляй свой код между createServerClient и getClaims
-	await supabase.auth.getClaims();
+	const { data } = await supabase.auth.getClaims();
+	const user = data?.claims;
+	const path = request.nextUrl.pathname;
+	const isAuthPage = path.startsWith('/login') || path.startsWith('/register');
 
-	// Редирект на /login — ПОЗЖЕ, когда будут страницы auth
+	if (!user && !isAuthPage) {
+		const url = request.nextUrl.clone();
+		url.pathname = '/login';
+		const redirectResponse = NextResponse.redirect(url);
+		supabaseResponse.cookies.getAll().forEach((cookie) => {
+			redirectResponse.cookies.set(cookie);
+		});
+		return redirectResponse;
+	}
+
+	if (user && isAuthPage) {
+		const url = request.nextUrl.clone();
+		url.pathname = '/';
+		const redirectResponse = NextResponse.redirect(url);
+		supabaseResponse.cookies.getAll().forEach((cookie) => {
+			redirectResponse.cookies.set(cookie);
+		});
+		return redirectResponse;
+	}
+
 	return supabaseResponse;
 }

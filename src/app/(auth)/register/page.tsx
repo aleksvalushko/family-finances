@@ -3,6 +3,8 @@ import TextField from '@/components/ui/text-field';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
+import Button from '@/components/ui/button';
+import { ChevronRight } from 'lucide-react';
 
 export default async function RegisterPage({
 	searchParams,
@@ -31,9 +33,7 @@ export default async function RegisterPage({
 	}
 
 	return (
-		<form
-			action={signUp}
-			className='flex flex-col items-center gap-y-4 rounded-2xl border border-white/10 bg-gray-900 p-8 shadow-2xl'>
+		<form action={signUp} className='auth-form'>
 			<TextField label='Имя' name='name' placeholder='Имя' />
 			<TextField label='E-mail' name='email' placeholder='E-mail' />
 			<TextField label='Пароль' name='password' placeholder='Пароль' type='password' />
@@ -41,12 +41,14 @@ export default async function RegisterPage({
 			<Suspense fallback={null}>
 				<AuthError searchParams={searchParams} />
 			</Suspense>
-			<button type='submit' className='w-fit cursor-pointer rounded-lg border border-white/30 p-2'>
-				Зарегистрироваться
-			</button>
-			<p>
+
+			<Button type='submit'>
+				Зарегистрироваться <ChevronRight className='size-4' />
+			</Button>
+
+			<p className='text-[14px]'>
 				Уже есть аккаунт?{' '}
-				<Link href='/login' className='text-blue-700 underline hover:text-blue-500'>
+				<Link href='/login' className='text-teal-300 hover:text-teal-500'>
 					Войти
 				</Link>
 			</p>

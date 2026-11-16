@@ -1,22 +1,53 @@
 import Link from 'next/link';
 import TextField from '@/components/ui/text-field';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
+import Button from '@/components/ui/button';
+import { ChevronRight } from 'lucide-react';
+import { Suspense } from 'react';
 
-export default function LoginPage() {
+export default function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+	async function signIn(formData: FormData) {
+		'use server';
+
+		const supabase = await createClient();
+		const email = String(formData.get('email') ?? '');
+		const password = String(formData.get('password') ?? '');
+		const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+		if (error) {
+			redirect(`/login?error=${encodeURIComponent(error.message)}`);
+		}
+		if (!data.session) {
+			redirect('/login');
+		}
+		redirect('/');
+	}
+
 	return (
-		<div className='flex flex-col items-center gap-y-4 rounded-2xl border border-white/10 bg-gray-900 p-8 shadow-2xl'>
-			<TextField label='Логин' placeholder='Логин' />
+		<form action={signIn} className='auth-form'>
+			<TextField label='E-mail' name='email' placeholder='E-mail' />
 
-			<TextField label='Пароль' placeholder='Пароль' type='password' />
+			<TextField label='Пароль' name='password' placeholder='Пароль' type='password' />
 
-			<button type='button' className='w-fit cursor-pointer rounded-lg border border-white/30 p-2'>
-				Войти
-			</button>
-			<p>
+			<Suspense fallback={null}>
+				<AuthError searchParams={searchParams} />
+			</Suspense>
+
+			<Button type='submit'>
+				Войти <ChevronRight className='size-4' />
+			</Button>
+			<p className='text-[14px]'>
 				Нет аккаунта?{' '}
-				<Link href='/register' className='text-blue-700 underline hover:text-blue-500'>
+				<Link href='/register' className='text-teal-300 hover:text-teal-500'>
 					Зарегистрироваться
 				</Link>
 			</p>
-		</div>
+		</form>
 	);
+}
+
+async function AuthError({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+	const { error } = await searchParams;
+	if (!error) return null;
+	return <p className='text-sm text-red-400'>{error}</p>;
 }

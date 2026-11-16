@@ -6,7 +6,7 @@ const Input = ({ className = '', ...props }: InputProps) => {
 	return (
 		<input
 			{...props}
-			className={`bg-input input h-[40px] w-full rounded-lg border px-2 text-[14px] outline-none disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+			className={`bg-input input h-[40px] w-full rounded-2xl border px-2 text-[14px] outline-none disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
 		/>
 	);
 };
