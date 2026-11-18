@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import Button from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import { Suspense } from 'react';
+import { AuthHeader } from '@/components/auth/auth-header';
 
 export default function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
 	async function signIn(formData: FormData) {
@@ -24,25 +25,28 @@ export default function LoginPage({ searchParams }: { searchParams: Promise<{ er
 	}
 
 	return (
-		<form action={signIn} className='auth-form'>
-			<TextField label='E-mail' name='email' placeholder='E-mail' />
+		<div className='auth-form-wrapper'>
+			<AuthHeader />
+			<form action={signIn} className='auth-form'>
+				<TextField label='E-mail' name='email' placeholder='E-mail' />
 
-			<TextField label='Пароль' name='password' placeholder='Пароль' type='password' />
+				<TextField label='Пароль' name='password' placeholder='Пароль' type='password' />
 
-			<Suspense fallback={null}>
-				<AuthError searchParams={searchParams} />
-			</Suspense>
+				<Suspense fallback={null}>
+					<AuthError searchParams={searchParams} />
+				</Suspense>
 
-			<Button type='submit'>
-				Войти <ChevronRight className='size-4' />
-			</Button>
-			<p className='text-[14px]'>
-				Нет аккаунта?{' '}
-				<Link href='/register' className='text-teal-300 hover:text-teal-500'>
-					Зарегистрироваться
-				</Link>
-			</p>
-		</form>
+				<Button type='submit'>
+					Войти <ChevronRight className='size-4' />
+				</Button>
+				<p className='text-label mt-[20px] text-[11px]'>
+					Нет аккаунта?{' '}
+					<Link href='/register' className='font-bold text-teal-300 hover:text-teal-500'>
+						Зарегистрироваться
+					</Link>
+				</p>
+			</form>
+		</div>
 	);
 }
 

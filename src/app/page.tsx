@@ -69,9 +69,7 @@ async function HomeContent() {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	if (!user) {
-		redirect('/login');
-	}
+	if (!user) return null;
 
 	const { data: profile } = await supabase
 		.from('profiles')
@@ -94,7 +92,7 @@ async function HomeContent() {
 	}
 
 	return (
-		<main className='flex min-h-screen flex-col items-center justify-center gap-8 bg-gray-950 px-4'>
+		<main className='flex min-h-screen flex-col items-center justify-center gap-8 px-4'>
 			<h1>Привет, {name}</h1>
 			{!profile?.family_id ? (
 				<>

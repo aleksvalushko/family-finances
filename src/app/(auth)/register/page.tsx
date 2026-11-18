@@ -1,63 +1,57 @@
-import Link from 'next/link';
-import TextField from '@/components/ui/text-field';
 import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
-import { Suspense } from 'react';
-import Button from '@/components/ui/button';
-import { ChevronRight } from 'lucide-react';
+import { RegisterFlow } from '@/components/auth/register-flow';
 
-export default async function RegisterPage({
-	searchParams,
-}: {
-	searchParams: Promise<{ error?: string }>;
-}) {
+export default async function RegisterPage() {
 	async function signUp(formData: FormData) {
 		'use server';
 
 		const supabase = await createClient();
-		const name = String(formData.get('name') ?? '');
 		const email = String(formData.get('email') ?? '');
 		const password = String(formData.get('password') ?? '');
+		const name = String(formData.get('name') ?? '');
+		const familyName = String(formData.get('familyName') ?? '');
+		const code = String(formData.get('code') ?? '');
 		const { data, error } = await supabase.auth.signUp({
 			email,
 			password,
 			options: { data: { name } },
 		});
-		if (error) {
-			redirect(`/register?error=${encodeURIComponent(error.message)}`);
+		if (error) return { error: error.message };
+		if (!data.session || !data.user) return { error: 'Не удалось создать сессию' };
+
+		if (familyName) {
+			const { data: family, error: familyError } = await supabase
+				.from('families')
+				.insert({ name: familyName, created_by: data.user.id })
+				.select('id, invite_code')
+				.single();
+
+			if (familyError || !family) return { error: 'Не удалось создать семью' };
+
+			const { error: updateError } = await supabase
+				.from('profiles')
+				.update({ family_id: family.id })
+				.eq('id', data.user.id);
+
+			if (updateError) return { error: 'Не удалось привязать семью' };
+
+			return { inviteCode: family.invite_code };
 		}
-		if (!data.session) {
-			redirect('/login');
-		}
-		redirect('/');
+
+		const { data: familyId, error: joinError } = await supabase.rpc('join_family', { code });
+
+		if (joinError || !familyId) return { error: 'Не удалось войти в семью' };
+
+		const { data: family, error: familyError } = await supabase
+			.from('families')
+			.select('invite_code')
+			.eq('id', familyId)
+			.single();
+
+		if (familyError || !family) return { error: 'Не удалось получить код приглашения' };
+
+		return { inviteCode: family.invite_code };
 	}
 
-	return (
-		<form action={signUp} className='auth-form'>
-			<TextField label='Имя' name='name' placeholder='Имя' />
-			<TextField label='E-mail' name='email' placeholder='E-mail' />
-			<TextField label='Пароль' name='password' placeholder='Пароль' type='password' />
-
-			<Suspense fallback={null}>
-				<AuthError searchParams={searchParams} />
-			</Suspense>
-
-			<Button type='submit'>
-				Зарегистрироваться <ChevronRight className='size-4' />
-			</Button>
-
-			<p className='text-[14px]'>
-				Уже есть аккаунт?{' '}
-				<Link href='/login' className='text-teal-300 hover:text-teal-500'>
-					Войти
-				</Link>
-			</p>
-		</form>
-	);
-}
-
-async function AuthError({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
-	const { error } = await searchParams;
-	if (!error) return null;
-	return <p className='text-sm text-red-400'>{error}</p>;
+	return <RegisterFlow signUpAction={signUp} />;
 }
