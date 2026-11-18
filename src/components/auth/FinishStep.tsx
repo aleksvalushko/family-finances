@@ -1,10 +1,10 @@
 'use client';
 
-import TextField from '@/components/ui/text-field';
-import Button from '@/components/ui/button';
-import { StepHeader } from '@/components/step-header';
-import { ScreenHeading } from '@/components/screen-heading';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import TextField from '@/components/ui/TextField';
+import Button from '@/components/ui/Button';
+import { StepHeader } from '@/components/StepHeader';
+import { ScreenHeading } from '@/components/ScreenHeading';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import { ChevronRight, Home, UsersRound } from 'lucide-react';
 
 type PROPS = {

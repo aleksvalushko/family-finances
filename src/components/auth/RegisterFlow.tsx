@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { ZeroStep } from '@/components/auth/zero-step';
-import { NameStep } from '@/components/auth/name-step';
-import { FinishStep } from '@/components/auth/finish-step';
-import { CreatedFamily } from '@/components/auth/created-family';
+import { ZeroStep } from '@/components/auth/ZeroStep';
+import { NameStep } from '@/components/auth/NameStep';
+import { FinishStep } from '@/components/auth/FinishStep';
+import { CreatedFamily } from '@/components/auth/CreatedFamily';
 import { signUpSchema } from '@/lib/auth-schema';
 
 type SignUpResult = { error?: string; inviteCode?: string };

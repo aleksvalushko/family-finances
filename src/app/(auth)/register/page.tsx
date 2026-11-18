@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import { RegisterFlow } from '@/components/auth/register-flow';
+import { RegisterFlow } from '@/components/auth/RegisterFlow';
 
 export default async function RegisterPage() {
 	async function signUp(formData: FormData) {

@@ -1,5 +1,5 @@
 import { type ComponentProps, ReactNode, useId } from 'react';
-import Input from '@/components/ui/input';
+import Input from '@/components/ui/Input';
 
 type TextFieldProps = ComponentProps<'input'> & {
 	label: string;

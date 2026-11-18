@@ -1,10 +1,10 @@
 'use client';
 
 import { Check, ChevronRight, UsersRound, X } from 'lucide-react';
-import TextField from '@/components/ui/text-field';
-import Button from '@/components/ui/button';
-import { StepHeader } from '@/components/step-header';
-import { ScreenHeading } from '@/components/screen-heading';
+import TextField from '@/components/ui/TextField';
+import Button from '@/components/ui/Button';
+import { StepHeader } from '@/components/StepHeader';
+import { ScreenHeading } from '@/components/ScreenHeading';
 import { signUpFields } from '@/lib/auth-schema';
 
 type PROPS = {

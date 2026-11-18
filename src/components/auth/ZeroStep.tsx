@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { ChevronRight, UsersRound } from 'lucide-react';
-import TextField from '@/components/ui/text-field';
-import Button from '@/components/ui/button';
-import { AuthHeader } from '@/components/auth/auth-header';
+import TextField from '@/components/ui/TextField';
+import Button from '@/components/ui/Button';
+import { AuthHeader } from '@/components/auth/AuthHeader';
 import { signUpFields } from '@/lib/auth-schema';
 
 type PROPS = {

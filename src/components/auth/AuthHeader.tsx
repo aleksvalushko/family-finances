@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { ScreenHeading } from '@/components/screen-heading';
+import { ScreenHeading } from '@/components/ScreenHeading';
 
 const subtitle: Record<string, string> = {
 	'/login': 'С возвращением в ваше общее семейное пространство.',

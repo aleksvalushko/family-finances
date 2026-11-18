@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import TextField from '@/components/ui/text-field';
+import TextField from '@/components/ui/TextField';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import Button from '@/components/ui/button';
+import Button from '@/components/ui/Button';
 import { ChevronRight } from 'lucide-react';
 import { Suspense } from 'react';
-import { AuthHeader } from '@/components/auth/auth-header';
+import { AuthHeader } from '@/components/auth/AuthHeader';
 
 export default function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
 	async function signIn(formData: FormData) {

@@ -2,9 +2,9 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { connection } from 'next/server';
 import { Suspense } from 'react';
-import Button from '@/components/ui/button';
+import Button from '@/components/ui/Button';
 import { ChevronLeft } from 'lucide-react';
-import TextField from '@/components/ui/text-field';
+import TextField from '@/components/ui/TextField';
 
 async function createFamily(formData: FormData) {
 	'use server';

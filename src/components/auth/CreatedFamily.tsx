@@ -1,8 +1,8 @@
 'use client';
 
-import Button from '@/components/ui/button';
-import { StepHeader } from '@/components/step-header';
-import { ScreenHeading } from '@/components/screen-heading';
+import Button from '@/components/ui/Button';
+import { StepHeader } from '@/components/StepHeader';
+import { ScreenHeading } from '@/components/ScreenHeading';
 import { Check, ChevronRight, Copy } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
