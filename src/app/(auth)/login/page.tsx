@@ -36,7 +36,7 @@ export default function LoginPage({ searchParams }: { searchParams: Promise<{ er
 					<AuthError searchParams={searchParams} />
 				</Suspense>
 
-				<Button type='submit'>
+				<Button type='submit' className='bg-button'>
 					Войти <ChevronRight className='size-4' />
 				</Button>
 				<p className='text-label mt-[20px] text-[11px]'>
